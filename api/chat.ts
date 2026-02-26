@@ -19,7 +19,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "mistralai/Mistral-7B-Instruct-v0.2",
+        model: "meta-llama/Llama-3.1-8B-Instruct",
         messages: [{ role: "user", content: message }],
       }),
     });
