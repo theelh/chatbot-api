@@ -38,10 +38,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const data = await hf.json();
 
-    const reply =
-      data?.choices?.[0]?.message?.content ||
-      data?.generated_text ||
-      "No response";
+
+console.log("HF RAW:", JSON.stringify(data));
+
+let reply = "No response";
+
+if (data?.choices?.[0]?.message?.content) {
+  reply = data.choices[0].message.content;
+} else if (data?.choices?.[0]?.text) {
+  reply = data.choices[0].text;
+} else if (data?.generated_text) {
+  reply = data.generated_text;
+} else if (Array.isArray(data) && data[0]?.generated_text) {
+  reply = data[0].generated_text;
+}
+
 
     return res.status(200).json({ reply });
   } catch (err) {
