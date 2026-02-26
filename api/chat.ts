@@ -37,6 +37,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
     const data = await hf.json();
+    console.log("HF RAW:", JSON.stringify(data)); // ← AJOUTE ÇA
 
 
 console.log("HF RAW:", JSON.stringify(data));
